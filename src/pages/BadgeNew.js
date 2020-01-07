@@ -12,6 +12,7 @@ class BadgeNew extends React.Component {
     jobTitle:'',
     email:'',
     twitter:'',
+    avatarUrl:'',
 
   } };
 
