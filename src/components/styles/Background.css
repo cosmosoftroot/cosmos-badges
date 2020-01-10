@@ -1,0 +1,37 @@
+.background__stars__notfound {
+  background: url("../../images/stars.svg"), #1b1b25;
+  background-repeat: repeat;
+  height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  /* position: relative; */
+}
+
+.background__stars__home {
+  background: url("../../images/stars.svg"), #1b1b25;
+  background-repeat: repeat;
+  height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  flex-direction: row; 
+  justify-content: center;
+
+  /* position: relative; */
+}
+
+ .img404{
+    width: 350px;
+    display: block;
+    margin-top: 30px;
+    /* left: calc(50% - 175px);
+    top: 70px;
+    position: absolute;
+     */
+}
+
+.msg404{
+    color: whitesmoke;
+    margin-top: 30px;
+}

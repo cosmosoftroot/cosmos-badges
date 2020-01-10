@@ -1,61 +1,43 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./styles/Badges.css";
-import Navbar from "../components/Navbar";
+
 import confLogo from "../images/badge-header.svg";
 import BadgesList from "../components/BadgesList";
-import defaultAvatar from "../images/default_avatar.jpg";
+import defaultAvatar from "../images/default_avatar.png";
 
 class Badges extends React.Component {
   state = {
-    data: [{
-      id: '0101',
-      firstName: 'Nata',
-      lastName: 'Night',
-      jobTitle: 'Data Marketing',
-      email: 'nataly.fg@gmail.com',
-      twitter: 'nfonseca',
-    },
-    {
-      id: '0102',
-      firstName: 'Katoxxxika',
-      lastName: 'Sanchez',
-      jobTitle: 'Human Rights',
-      email: 'kalosaji@gmail.cm',
-      twitter: 'resistencia',
-    },
-    {
-      id: '0103',
-      firstName: 'Adrian',
-      lastName: 'Jackson',
-      jobTitle: 'Engineer',
-      email: 'sapitoadrian@gmail.com',
-      twitter: 'adrianson',
-
-    },
-    {
-      id: '0104',
-      firstName: 'Ivan',
-      lastName: 'Tesla',
-      jobTitle: 'CEO Cosmosoft',
-      email: 'tesla@gmail.cm',
-      twitter: 'itesla',
-    },
-    {
-      id: '0105',
-      firstName: 'Meryxxx',
-      lastName: 'Visions',
-      jobTitle: 'Oráculo',
-      email: 'sapitoadrian@gmail.com',
-      twitter: 'mxxx',
-
-    }]
-  }
+    data: [
+      {
+        id: "0101",
+        firstName: "Richard",
+        lastName: "Stallman",
+        jobTitle: "Activist and programmer",
+        email: "no.more.microsoft@gmail.com",
+        twitter: "rstallman"
+      },
+      {
+        id: "0104",
+        firstName: "Ivan",
+        lastName: "Sanchez",
+        jobTitle: "Full stack developer",
+        email: "isanchez@comosoft.com",
+        twitter: "cosmosftroot"
+      },
+      {
+        id: "0105",
+        firstName: "Nicola",
+        lastName: "Tesla",
+        jobTitle: "Genius",
+        email: "nicotesla@gmail.com",
+        twitter: "iknowall"
+      }
+    ]
+  };
   render() {
     return (
-      <div>
-        <Navbar />
-
+      <React.Fragment>
         <div className="Badges">
           <div className="Badges__hero">
             <div className="Badges__container">
@@ -77,7 +59,7 @@ class Badges extends React.Component {
             <BadgesList badges={this.state.data} avatarUrl={defaultAvatar} />
           </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
