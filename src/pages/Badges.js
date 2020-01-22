@@ -4,73 +4,51 @@ import "./styles/Badges.css";
 
 import confLogo from "../images/badge-header.svg";
 import BadgesList from "../components/BadgesList";
-import defaultAvatar from "../images/default_avatar.png";
+import PageLoading from "../components/PageLoading";
+import PageError from "../components/PageError";
+import MiniLoader from "../components/MiniLoader";
+
+import api from "../api";
 
 class Badges extends React.Component {
   constructor(props) {
     super(props);
-    console.log("1. constructor()");
+
     this.state = {
-      data: []
+      loading: true,
+      error: null,
+      data: undefined
     };
   }
 
   componentDidMount() {
-    console.log("3. componentDidMount()");
-
-    this.timeoutId = setTimeout(() => {
-      this.setState({
-        data: [
-          {
-            id: "0101",
-            firstName: "Richard",
-            lastName: "Stallman",
-            jobTitle: "Activist and programmer",
-            email: "no.more.microsoft@gmail.com",
-            twitter: "rstallman"
-          },
-          {
-            id: "0104",
-            firstName: "Ivan",
-            lastName: "Sanchez",
-            jobTitle: "Full stack developer",
-            email: "isanchez@comosoft.com",
-            twitter: "cosmosftroot"
-          },
-          {
-            id: "0105",
-            firstName: "Nicola",
-            lastName: "Tesla",
-            jobTitle: "Genius",
-            email: "nicotesla@gmail.com",
-            twitter: "iknowall"
-          }
-        ]
-      });
-    }, 3000);
-
+    this.fetchData();
+    this.intervalId = setInterval(() => this.fetchData(), 5000);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log("5. componentDidUpdate()");
-
-    console.log({
-      prevProps: prevProps, prevState: prevState
-    })
-
-    console.log({
-      props: this.props, state: this.state
-    })
-
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
   }
 
-  componentWillUnmount(){
-    console.log("6. componentWillUnmount()")
-    clearTimeout(this.timeoutId)
+  async fetchData() {
+    this.setState({ loading: true, error: null });
+    try {
+      const data = await api.badges.list();
+      this.setState({ loading: false, data: data });
+    } catch (error) {
+      this.setState({ loading: false, error: error });
+    }
   }
 
   render() {
-    console.log("2/4. render()");
+    if (this.state.loading && !this.state.data) {
+      return <PageLoading />;
+    }
+
+    if (this.state.error) {
+      return <PageError error={this.state.error} />;
+    }
+
     return (
       <React.Fragment>
         <div className="Badges">
@@ -91,7 +69,8 @@ class Badges extends React.Component {
 
         <div className="Badges__list">
           <div className="Badges__container">
-            <BadgesList badges={this.state.data} avatarUrl={defaultAvatar} />
+            <BadgesList badges={this.state.data} />
+            {this.state.loading && <MiniLoader />}
           </div>
         </div>
       </React.Fragment>
